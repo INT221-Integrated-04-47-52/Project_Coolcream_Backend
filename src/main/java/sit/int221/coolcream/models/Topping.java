@@ -2,8 +2,10 @@ package sit.int221.coolcream.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "topping")
 public class Topping {
   @Id
   @Column(name="topping_id")
@@ -14,7 +16,6 @@ public class Topping {
   private String toppingImage;
 
 
-
   public long getToppingId() {
     return toppingId;
   }
@@ -22,7 +23,6 @@ public class Topping {
   public void setToppingId(long toppingId) {
     this.toppingId = toppingId;
   }
-
 
   public String getToppingName() {
     return toppingName;
