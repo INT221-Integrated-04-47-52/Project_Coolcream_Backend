@@ -1,16 +1,21 @@
 package sit.int221.coolcream.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "brand")
 public class Brand {
   @Id
   @Column(name="brand_id")
   private long brandId;
   @Column(name="brand_name")
   private  String brandName;
+  @JsonBackReference
+  @OneToMany(mappedBy = "brand")
+  private List<Product> products;
 
 
 
