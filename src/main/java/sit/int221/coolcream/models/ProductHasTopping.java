@@ -1,14 +1,16 @@
 package sit.int221.coolcream.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "product_has_topping")
 public class ProductHasTopping {
   @Id
+  @Column(name = "has_topping_id")
   private String hasToppingId;
+  @Column(name = "topping_id")
   private long toppingId;
+  @Column(name = "product_id")
   private long productId;
 //  @ManyToOne
 //  private Product products;
