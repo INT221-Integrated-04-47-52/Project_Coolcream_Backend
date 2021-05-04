@@ -17,19 +17,9 @@ public class ProductController {
         return productRepository.findAll();
     }
 
-//    @GetMapping ("/show/{product_id}")
-//    public Product show (@PathVariable Long product_id){
-//        return productRepository.findById(product_id).orElse(null);
-//    }
-
     @PostMapping("/add")
     public Product add (@RequestBody Product product){
         return productRepository.save(product);
-    }
-
-    @PutMapping("/edit/{product_id}")
-    public List<Product> add (@PathVariable Long product_id){
-        return productRepository.findAll();
     }
 
     @DeleteMapping("/delete/{product_id}")
@@ -37,4 +27,11 @@ public class ProductController {
         productRepository.deleteById(product_id);
         return productRepository.findAll();
     }
+
+    @PutMapping("/edit/{product_id}")
+    public Product edit (@RequestBody Product product){
+        productRepository.findById(product.getProductId()).orElse(null);
+        return productRepository.save(product);
+    }
+
 }
