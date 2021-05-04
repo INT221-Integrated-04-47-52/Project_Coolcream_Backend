@@ -15,7 +15,7 @@ public class Size {
   private String sizeType;
   @JsonBackReference
   @OneToMany(mappedBy = "size")
-  private List<Product> products;
+  private List<Icecream> icecreams;
 
 
   public long getSizeId() {

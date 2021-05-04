@@ -15,7 +15,7 @@ public class Brand {
   private  String brandName;
   @JsonBackReference
   @OneToMany(mappedBy = "brand")
-  private List<Product> products;
+  private List<Icecream> icecreams;
 
 
 
