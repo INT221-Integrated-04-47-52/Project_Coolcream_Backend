@@ -1,7 +1,5 @@
 package sit.int221.coolcream.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -24,9 +22,8 @@ public class Product {
   @ManyToOne
   @JoinColumn(name="size_size_id")
   private Size size;
-//  @JsonBackReference
-//  @OneToMany(mappedBy = "product")
-//  private List<ProductHasTopping> productHasToppings;
+  @OneToMany(mappedBy = "product")
+  private List<ProductHasTopping> productHasToppings;
 
 
   public long getProductId() {
@@ -99,11 +96,11 @@ public class Product {
     this.size = size;
   }
 
-//  public List<ProductHasTopping> getProductHasToppings() {
-//    return productHasToppings;
-//  }
-//
-//  public void setProductHasToppings(List<ProductHasTopping> productHasToppings) {
-//    this.productHasToppings = productHasToppings;
-//  }
+  public List<ProductHasTopping> getProductHasToppings() {
+    return productHasToppings;
+  }
+
+  public void setProductHasToppings(List<ProductHasTopping> productHasToppings) {
+    this.productHasToppings = productHasToppings;
+  }
 }
