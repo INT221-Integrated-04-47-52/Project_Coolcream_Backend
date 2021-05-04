@@ -1,17 +1,18 @@
 package sit.int221.coolcream.models;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
-@Table(name="product")
-public class Product {
+@Table(name= "icecream")
+public class Icecream {
 
   @Id
-  @Column(name="product_id")
-  private long productId;
-  @Column(name="product_name")
-  private String productName;
+  @Column(name= "icecream_id")
+  private long icecreamId;
+  @Column(name= "icecream_name")
+  private String icecreamName;
   private String description;
   private double price;
   private java.sql.Date lastday;
@@ -22,27 +23,25 @@ public class Product {
   @ManyToOne
   @JoinColumn(name="size_size_id")
   private Size size;
-  @OneToMany(mappedBy = "product")
-  private List<ProductHasTopping> productHasToppings;
+  @OneToMany(mappedBy = "icecream")
+  private List<IcecreamtHasTopping> icecreamtHasToppings;
 
 
-  public long getProductId() {
-    return productId;
+  public long getIcecreamId() {
+    return icecreamId;
   }
 
-  public void setProductId(long productId) {
-    this.productId = productId;
+  public void setIcecreamId(long icecreamId) {
+    this.icecreamId = icecreamId;
   }
 
-
-  public String getProductName() {
-    return productName;
+  public String getIcecreamName() {
+    return icecreamName;
   }
 
-  public void setProductName(String productName) {
-    this.productName = productName;
+  public void setIcecreamName(String icecreamName) {
+    this.icecreamName = icecreamName;
   }
-
 
   public String getDescription() {
     return description;
@@ -52,7 +51,6 @@ public class Product {
     this.description = description;
   }
 
-
   public double getPrice() {
     return price;
   }
@@ -61,15 +59,13 @@ public class Product {
     this.price = price;
   }
 
-
-  public java.sql.Date getLastday() {
+  public Date getLastday() {
     return lastday;
   }
 
-  public void setLastday(java.sql.Date lastday) {
+  public void setLastday(Date lastday) {
     this.lastday = lastday;
   }
-
 
   public String getImage() {
     return image;
@@ -78,7 +74,6 @@ public class Product {
   public void setImage(String image) {
     this.image = image;
   }
-
 
   public Brand getBrand() {
     return brand;
@@ -96,11 +91,11 @@ public class Product {
     this.size = size;
   }
 
-  public List<ProductHasTopping> getProductHasToppings() {
-    return productHasToppings;
+  public List<IcecreamtHasTopping> getIcecreamtHasToppings() {
+    return icecreamtHasToppings;
   }
 
-  public void setProductHasToppings(List<ProductHasTopping> productHasToppings) {
-    this.productHasToppings = productHasToppings;
+  public void setIcecreamtHasToppings(List<IcecreamtHasTopping> icecreamtHasToppings) {
+    this.icecreamtHasToppings = icecreamtHasToppings;
   }
 }

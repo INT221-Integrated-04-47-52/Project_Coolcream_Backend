@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "product_has_topping")
-public class ProductHasTopping {
+@Table(name = "icecream_has_topping")
+public class IcecreamtHasTopping {
   @Id
   @Column(name = "has_topping_id")
   private String hasToppingId;
@@ -15,8 +15,8 @@ public class ProductHasTopping {
   private Topping topping;
   @JsonBackReference
   @ManyToOne
-  @JoinColumn(name="product_id")
-  private Product product;
+  @JoinColumn(name= "icecream_id")
+  private Icecream icecream;
 
 
   public String getHasToppingId() {
@@ -27,7 +27,6 @@ public class ProductHasTopping {
     this.hasToppingId = hasToppingId;
   }
 
-
   public Topping getTopping() {
     return topping;
   }
@@ -36,12 +35,11 @@ public class ProductHasTopping {
     this.topping = topping;
   }
 
-  public Product getProduct() {
-    return product;
+  public Icecream getIcecream() {
+    return icecream;
   }
 
-  public void setProduct(Product product) {
-    this.product = product;
+  public void setIcecream(Icecream icecream) {
+    this.icecream = icecream;
   }
-
 }
