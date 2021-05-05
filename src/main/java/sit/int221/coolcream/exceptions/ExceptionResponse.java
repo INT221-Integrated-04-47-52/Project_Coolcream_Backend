@@ -5,7 +5,8 @@ import java.time.LocalDateTime;
 public class ExceptionResponse {
 
     public static enum ERROR_CODE {
-        ICECREAM_DOES_NOT_EXIST(101), ICECREAM_ALREADY_EXIST(102);
+        ICECREAM_DOES_NOT_EXIST(101), ICECREAM_ALREADY_EXIST(102),
+        ICECREAM_NAME_ALREADY_EXIST(103);
 
         private int errorValue;
 
@@ -22,5 +23,17 @@ public class ExceptionResponse {
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
         this.errorDateTime = errorDateTime;
+    }
+
+    public ERROR_CODE getErrorCode() {
+        return errorCode;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public LocalDateTime getErrorDateTime() {
+        return errorDateTime;
     }
 }
