@@ -7,6 +7,7 @@ import sit.int221.coolcream.repositories.IcecreamRepository;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class IcecreamController {
     @Autowired
@@ -32,6 +33,11 @@ public class IcecreamController {
     public Icecream edit (@RequestBody Icecream icecream){
         icecreamRepository.findById(icecream.getIcecreamId()).orElse(null);
         return icecreamRepository.save(icecream);
+    }
+
+    @GetMapping("/max-icecreamId")
+    public long maxIcecreamId (){
+        return icecreamRepository.getMaxIcecreamId();
     }
 
 }
