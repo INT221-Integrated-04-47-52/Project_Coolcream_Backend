@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "icecream_has_topping")
-public class IcecreamtHasTopping {
+public class IcecreamHasTopping {
   @Id
   @Column(name = "has_topping_id")
   private String hasToppingId;
