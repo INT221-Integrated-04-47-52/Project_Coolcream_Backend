@@ -24,7 +24,7 @@ public class Icecream {
   @JoinColumn(name="size_size_id")
   private Size size;
   @OneToMany(mappedBy = "icecream")
-  private List<IcecreamtHasTopping> icecreamtHasToppings;
+  private List<IcecreamHasTopping> icecreamHasToppings;
 
 
   public long getIcecreamId() {
@@ -91,11 +91,11 @@ public class Icecream {
     this.size = size;
   }
 
-  public List<IcecreamtHasTopping> getIcecreamtHasToppings() {
-    return icecreamtHasToppings;
+  public List<IcecreamHasTopping> getIcecreamHasToppings() {
+    return icecreamHasToppings;
   }
 
-  public void setIcecreamtHasToppings(List<IcecreamtHasTopping> icecreamtHasToppings) {
-    this.icecreamtHasToppings = icecreamtHasToppings;
+  public void setIcecreamHasToppings(List<IcecreamHasTopping> icecreamHasToppings) {
+    this.icecreamHasToppings = icecreamHasToppings;
   }
 }
