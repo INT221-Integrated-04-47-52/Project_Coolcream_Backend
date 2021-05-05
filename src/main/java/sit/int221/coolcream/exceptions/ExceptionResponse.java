@@ -6,7 +6,7 @@ public class ExceptionResponse {
 
     public static enum ERROR_CODE {
         ICECREAM_DOES_NOT_EXIST(101), ICECREAM_ALREADY_EXIST(102),
-        ICECREAM_NAME_ALREADY_EXIST(103);
+        ICECREAM_ID_ALREADY_EXIST(103), ICECREAM_NAME_ALREADY_EXIST(104);
 
         private int errorValue;
 
