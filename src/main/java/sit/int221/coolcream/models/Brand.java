@@ -13,6 +13,8 @@ public class Brand {
   private long brandId;
   @Column(name="brand_name")
   private  String brandName;
+  @Column(name="brand_image")
+  private String brandImage;
   @JsonBackReference
   @OneToMany(mappedBy = "brand")
   private List<Icecream> icecreams;
@@ -22,7 +24,6 @@ public class Brand {
   public long getBrandId() {
     return brandId;
   }
-
   public void setBrandId(long brandId) {
     this.brandId = brandId;
   }
@@ -34,6 +35,11 @@ public class Brand {
     return brandName;
   }
 
+  public String getBrandImage() {
+    return brandImage;
+  }
 
-
+  public void setBrandImage(String brandImage) {
+    this.brandImage = brandImage;
+  }
 }
