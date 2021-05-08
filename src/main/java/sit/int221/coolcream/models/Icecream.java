@@ -26,6 +26,19 @@ public class Icecream {
   @OneToMany(mappedBy = "icecream")
   private List<IcecreamHasTopping> icecreamHasToppings;
 
+  public Icecream() {
+  }
+
+  public Icecream(long icecreamId, String icecreamName, String description, double price, Date lastday, String image, Brand brand, Size size) {
+    this.icecreamId = icecreamId;
+    this.icecreamName = icecreamName;
+    this.description = description;
+    this.price = price;
+    this.lastday = lastday;
+    this.image = image;
+    this.brand = brand;
+    this.size = size;
+  }
 
   public long getIcecreamId() {
     return icecreamId;

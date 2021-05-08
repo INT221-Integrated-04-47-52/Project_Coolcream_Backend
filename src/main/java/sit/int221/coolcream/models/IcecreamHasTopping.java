@@ -19,7 +19,6 @@ public class IcecreamHasTopping {
   @JoinColumn(name= "icecream_id")
   private Icecream icecream;
 
-
   public Long getHasToppingId() {
     return hasToppingId;
   }
