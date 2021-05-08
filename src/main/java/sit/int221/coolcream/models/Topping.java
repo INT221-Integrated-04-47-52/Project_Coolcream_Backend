@@ -1,8 +1,8 @@
 package sit.int221.coolcream.models;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "topping")
@@ -14,6 +14,9 @@ public class Topping {
   private String toppingName;
   @Column(name="topping_image")
   private String toppingImage;
+  @JsonBackReference
+  @OneToMany(mappedBy = "topping")
+  private List<IcecreamHasTopping> icecreamHasToppings;
 
 
   public long getToppingId() {
@@ -39,6 +42,5 @@ public class Topping {
   public void setToppingImage(String toppingImage) {
     this.toppingImage = toppingImage;
   }
-
 
 }

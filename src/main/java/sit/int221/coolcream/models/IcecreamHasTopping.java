@@ -9,7 +9,8 @@ import javax.persistence.*;
 public class IcecreamHasTopping {
   @Id
   @Column(name = "has_topping_id")
-  private String hasToppingId;
+  private Long hasToppingId;
+
   @ManyToOne
   @JoinColumn(name="topping_id")
   private Topping topping;
@@ -19,11 +20,11 @@ public class IcecreamHasTopping {
   private Icecream icecream;
 
 
-  public String getHasToppingId() {
+  public Long getHasToppingId() {
     return hasToppingId;
   }
 
-  public void setHasToppingId(String hasToppingId) {
+  public void setHasToppingId(Long hasToppingId) {
     this.hasToppingId = hasToppingId;
   }
 
