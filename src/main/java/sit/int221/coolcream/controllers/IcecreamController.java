@@ -7,7 +7,11 @@ import org.springframework.web.multipart.MultipartFile;
 import sit.int221.coolcream.exceptions.ExceptionResponse;
 import sit.int221.coolcream.exceptions.IcecreamException;
 import sit.int221.coolcream.models.Icecream;
+import sit.int221.coolcream.models.IcecreamHasTopping;
+import sit.int221.coolcream.models.Topping;
+import sit.int221.coolcream.repositories.IcecreamHasToppingRepository;
 import sit.int221.coolcream.repositories.IcecreamRepository;
+import sit.int221.coolcream.repositories.ToppingRepository;
 import sit.int221.coolcream.services.StorageService;
 
 import java.util.List;
@@ -16,6 +20,8 @@ import java.util.List;
 public class IcecreamController {
     @Autowired
     private IcecreamRepository icecreamRepository;
+    @Autowired
+    private IcecreamHasToppingRepository icecreamHasToppingRepository;
     @Autowired
     StorageService storageService;
 
@@ -39,12 +45,19 @@ public class IcecreamController {
             throw new IcecreamException(ExceptionResponse.ERROR_CODE.ICECREAM_NAME_ALREADY_EXIST,
                     "Can't add. Icecream name: " + newIcecream.getIcecreamName() + " already exist.");
         }
+        Icecream icecreamNoTopping = new Icecream(newIcecream.getIcecreamId(), newIcecream.getIcecreamName(), newIcecream.getDescription(), newIcecream.getPrice(), newIcecream.getLastday(), newIcecream.getImage(), newIcecream.getBrand(), newIcecream.getSize());
+        icecreamRepository.save(icecreamNoTopping);
+        List<IcecreamHasTopping> icecreamHasToppings = newIcecream.getIcecreamHasToppings();
+        for (IcecreamHasTopping iceHasTopping : icecreamHasToppings) {
+            iceHasTopping.setIcecream(newIcecream);
+            icecreamHasToppingRepository.save(iceHasTopping);
+        }
         return icecreamRepository.save(newIcecream);
     }
 
     @PostMapping(value = "/add/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Icecream addIcecreamWithImage
-            (@RequestParam(value="image",required = false) MultipartFile imageFile,@RequestPart Icecream newIcecream){
+            (@RequestParam(value = "image", required = false) MultipartFile imageFile, @RequestPart Icecream newIcecream) {
         if (icecreamRepository.findById(newIcecream.getIcecreamId()).orElse(null) != null
                 && icecreamRepository.findByName(newIcecream.getIcecreamName()) != null) {
             throw new IcecreamException(ExceptionResponse.ERROR_CODE.ICECREAM_ALREADY_EXIST,
@@ -61,6 +74,13 @@ public class IcecreamController {
             throw new IcecreamException(ExceptionResponse.ERROR_CODE.ICECREAM_IMAGE_NULL,
                     "Can't add. Icecream id: " + newIcecream.getIcecreamId());
         } else newIcecream.setImage(storageService.store(imageFile, newIcecream.getIcecreamId()));
+        Icecream icecreamNoTopping = new Icecream(newIcecream.getIcecreamId(), newIcecream.getIcecreamName(), newIcecream.getDescription(), newIcecream.getPrice(), newIcecream.getLastday(), newIcecream.getImage(), newIcecream.getBrand(), newIcecream.getSize());
+        icecreamRepository.save(icecreamNoTopping);
+        List<IcecreamHasTopping> icecreamHasToppings = newIcecream.getIcecreamHasToppings();
+        for (IcecreamHasTopping iceHasTopping : icecreamHasToppings) {
+            iceHasTopping.setIcecream(newIcecream);
+            icecreamHasToppingRepository.save(iceHasTopping);
+        }
         return icecreamRepository.save(newIcecream);
     }
 
@@ -72,6 +92,10 @@ public class IcecreamController {
             throw new IcecreamException(ExceptionResponse.ERROR_CODE.ICECREAM_ID_ALREADY_EXIST,
                     "Can't delete. Icecream id: " + icecream_id + " does not exist.");
         } else storageService.delete(icecream.getImage());
+        List<IcecreamHasTopping> beforeEditIcecream = icecream.getIcecreamHasToppings();
+        for (IcecreamHasTopping iceHasTopping : beforeEditIcecream) {
+            icecreamHasToppingRepository.deleteById(iceHasTopping.getHasToppingId());
+        }
         icecreamRepository.deleteById(icecream_id);
     }
 
@@ -86,11 +110,15 @@ public class IcecreamController {
             throw new IcecreamException(ExceptionResponse.ERROR_CODE.ICECREAM_NAME_ALREADY_EXIST,
                     "Can't edit. Icecream name: " + editIcecream.getIcecreamName() + " already exist.");
         }
+        List<IcecreamHasTopping> beforeEditIcecream = icecreamId.getIcecreamHasToppings();
+        for (IcecreamHasTopping iceHasTopping : beforeEditIcecream) {
+            icecreamHasToppingRepository.deleteById(iceHasTopping.getHasToppingId());
+        }
         return icecreamRepository.save(editIcecream);
     }
 
     @PutMapping("/edit/image")
-    public Icecream editWithImage(@RequestParam(value="image",required = false) MultipartFile imageFile, @RequestPart Icecream editIcecream) {
+    public Icecream editWithImage(@RequestParam(value = "image", required = false) MultipartFile imageFile, @RequestPart Icecream editIcecream) {
         Icecream icecreamId = icecreamRepository.findById(editIcecream.getIcecreamId()).orElse(null);
         Icecream icecreamName = icecreamRepository.findByName(editIcecream.getIcecreamName());
         if (icecreamId == null) {
@@ -99,11 +127,23 @@ public class IcecreamController {
         } else if (icecreamName != null && icecreamId.getIcecreamId() != icecreamName.getIcecreamId()) {
             throw new IcecreamException(ExceptionResponse.ERROR_CODE.ICECREAM_NAME_ALREADY_EXIST,
                     "Can't edit. Icecream name: " + editIcecream.getIcecreamName() + " already exist.");
-        }  else if (imageFile == null) {
+        } else if (imageFile == null) {
             throw new IcecreamException(ExceptionResponse.ERROR_CODE.ICECREAM_IMAGE_NULL,
                     "Can't add. Icecream id: " + editIcecream.getIcecreamId());
-        } storageService.delete(icecreamId.getImage());
+        }
+        storageService.delete(icecreamId.getImage());
         editIcecream.setImage(storageService.store(imageFile, editIcecream.getIcecreamId()));
+        List<IcecreamHasTopping> beforeEditIcecream = icecreamId.getIcecreamHasToppings();
+        for (IcecreamHasTopping iceHasTopping : beforeEditIcecream) {
+            icecreamHasToppingRepository.deleteById(iceHasTopping.getHasToppingId());
+        }
+        Icecream icecreamNoTopping = new Icecream(editIcecream.getIcecreamId(), editIcecream.getIcecreamName(), editIcecream.getDescription(), editIcecream.getPrice(), editIcecream.getLastday(), editIcecream.getImage(), editIcecream.getBrand(), editIcecream.getSize());
+        icecreamRepository.save(icecreamNoTopping);
+        List<IcecreamHasTopping> icecreamHasToppings = editIcecream.getIcecreamHasToppings();
+        for (IcecreamHasTopping iceHasTopping : icecreamHasToppings) {
+            iceHasTopping.setIcecream(editIcecream);
+            icecreamHasToppingRepository.save(iceHasTopping);
+        }
         return icecreamRepository.save(editIcecream);
     }
 
