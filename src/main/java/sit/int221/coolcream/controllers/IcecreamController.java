@@ -8,10 +8,8 @@ import sit.int221.coolcream.exceptions.ExceptionResponse;
 import sit.int221.coolcream.exceptions.IcecreamException;
 import sit.int221.coolcream.models.Icecream;
 import sit.int221.coolcream.models.IcecreamHasTopping;
-import sit.int221.coolcream.models.Topping;
 import sit.int221.coolcream.repositories.IcecreamHasToppingRepository;
 import sit.int221.coolcream.repositories.IcecreamRepository;
-import sit.int221.coolcream.repositories.ToppingRepository;
 import sit.int221.coolcream.services.StorageService;
 
 import java.util.List;

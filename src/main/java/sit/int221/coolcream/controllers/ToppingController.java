@@ -8,7 +8,7 @@ import sit.int221.coolcream.models.Topping;
 import sit.int221.coolcream.repositories.ToppingRepository;
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:8080")
+
 @RestController
 public class ToppingController {
     @Autowired

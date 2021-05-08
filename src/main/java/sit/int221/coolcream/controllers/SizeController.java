@@ -8,7 +8,7 @@ import sit.int221.coolcream.models.Size;
 import sit.int221.coolcream.repositories.SizeRepository;
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:8080")
+
 @RestController
 public class SizeController {
     @Autowired

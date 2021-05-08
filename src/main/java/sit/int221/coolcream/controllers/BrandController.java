@@ -8,7 +8,7 @@ import sit.int221.coolcream.models.Brand;
 import sit.int221.coolcream.repositories.BrandRepository;
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:8080")
+
 @RestController
 public class BrandController {
     @Autowired
