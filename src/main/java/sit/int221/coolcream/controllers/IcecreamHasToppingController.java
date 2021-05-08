@@ -17,4 +17,9 @@ public class IcecreamHasToppingController {
     public List<IcecreamHasTopping> icecreamHasToppingstopping() {
         return icecreamHasToppingRepository.findAll();
     }
+
+    @GetMapping("/max-icecreamHasToppingId")
+    public long maxIcecreamHasToppingId() {
+        return icecreamHasToppingRepository.getMaxIcecreamId();
+    }
 }
