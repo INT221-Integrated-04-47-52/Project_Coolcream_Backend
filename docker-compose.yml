@@ -10,6 +10,8 @@ services:
       - MYSQL_ROOT_PASSWORD=Coolcream044752
     volumes:
       - ~/backend_data:/public/icecream-images
+    port:
+      - "6001:6001"
 
 networks:
   default:
