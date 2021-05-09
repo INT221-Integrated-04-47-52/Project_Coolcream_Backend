@@ -5,6 +5,6 @@ WORKDIR /workspace
 RUN mvn clean install
 
 FROM openjdk:11.0-slim
-EXPOSE 3000
+EXPOSE 6001
 COPY --from=backend /workspace/target/*.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
