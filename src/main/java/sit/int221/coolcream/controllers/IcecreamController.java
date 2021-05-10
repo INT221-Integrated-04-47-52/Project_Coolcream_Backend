@@ -14,7 +14,6 @@ import sit.int221.coolcream.services.StorageService;
 
 import java.util.List;
 
-//@CrossOrigin("http://localhost:8080/")
 @RestController
 public class IcecreamController {
     @Autowired
