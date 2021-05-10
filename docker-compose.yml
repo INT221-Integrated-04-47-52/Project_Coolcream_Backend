@@ -9,7 +9,7 @@ services:
       - MYSQL_USER=root
       - MYSQL_ROOT_PASSWORD=Coolcream044752
     volumes:
-      - ~/backend_data:/public/icecream-images
+      - ~/backend_data/icecream-images:/public/icecream-images
     ports:
       - "6001:6001"
 
