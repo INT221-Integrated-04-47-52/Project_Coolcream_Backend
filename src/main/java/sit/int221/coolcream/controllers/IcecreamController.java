@@ -14,6 +14,7 @@ import sit.int221.coolcream.services.StorageService;
 
 import java.util.List;
 
+//@CrossOrigin("http://localhost:8080/")
 @RestController
 public class IcecreamController {
     @Autowired
@@ -82,7 +83,6 @@ public class IcecreamController {
         return icecreamRepository.save(newIcecream);
     }
 
-
     @DeleteMapping("/delete/{icecream_id}")
     public void delete(@PathVariable Long icecream_id) {
         Icecream icecream = icecreamRepository.findById(icecream_id).orElse(null);
@@ -98,7 +98,7 @@ public class IcecreamController {
     }
 
     @PutMapping("/edit")
-    public Icecream edit(@RequestBody Icecream editIcecream) {
+    public Icecream edit(@RequestPart Icecream editIcecream) {
         Icecream icecreamId = icecreamRepository.findById(editIcecream.getIcecreamId()).orElse(null);
         Icecream icecreamName = icecreamRepository.findByName(editIcecream.getIcecreamName());
         if (icecreamId == null) {
@@ -144,7 +144,6 @@ public class IcecreamController {
         }
         return icecreamRepository.save(editIcecream);
     }
-
 
     @GetMapping("/max-icecreamId")
     public long maxIcecreamId() {
