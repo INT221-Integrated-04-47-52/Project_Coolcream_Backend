@@ -111,6 +111,11 @@ public class IcecreamController {
         for (IcecreamHasTopping iceHasTopping : beforeEditIcecream) {
             icecreamHasToppingRepository.deleteById(iceHasTopping.getHasToppingId());
         }
+        List<IcecreamHasTopping> icecreamHasToppings = editIcecream.getIcecreamHasToppings();
+        for (IcecreamHasTopping iceHasTopping : icecreamHasToppings) {
+            iceHasTopping.setIcecream(editIcecream);
+            icecreamHasToppingRepository.save(iceHasTopping);
+        }
         return icecreamRepository.save(editIcecream);
     }
 
